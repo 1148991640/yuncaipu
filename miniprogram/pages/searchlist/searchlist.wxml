@@ -1,0 +1,68 @@
+ <!-- 判断是否有菜谱 -->
+ <!-- 有菜谱时显示的内容 -->
+ <view class="hot-recipe-lists">
+ 	<!-- 菜谱列表 循环项-->
+ 	<view class='hot-recipe-list' wx:for="{{recipeList}}" wx:key="_id">
+ 		<!-- 菜谱图片 -->
+ 		<view class="recipeimage">
+ 			<image src="{{item.imgs[0]}}"></image>
+ 		</view>
+ 		<!-- 菜谱信息 -->
+ 		<view class="recipeinfo">
+ 			<!-- 菜谱名称 -->
+ 			<view class="recipename">
+ 				<text>{{item.recipename}}</text>
+ 			</view>
+ 			<view class="recipefooter">
+ 				<!-- 几星图片 ，-->
+ 				<view class="xingxing">
+				 <!-- 
+					 10
+					 10-50
+					 50-80
+					 80-140
+					 140-200
+					 200
+				  -->
+ 					<block wx:if="{{item.views < 10}}">
+ 						<image  src="/static/index/xing0.png"></image>
+ 					</block>
+ 					<block wx:elif="{{item.views >= 10 && item.views < 50}}">
+ 						<image  src="/static/index/xing1.png"></image>
+ 					</block>
+ 					<block wx:elif="{{item.views >= 50 && item.views < 80}}">
+ 						<image  src="/static/index/xing2.png"></image>
+ 					</block>
+ 					<block wx:elif="{{item.views >= 80 && item.views < 140}}">
+ 						<image  src="/static/index/xing3.png"></image>
+ 					</block>
+ 					<block wx:elif="{{item.views >= 140 && item.views < 200}}">
+ 						<image  src="/static/index/xing4.png"></image>
+ 					</block>
+ 					<block wx:else>
+ 						<image  src="/static/index/xing5.png"></image>
+ 					</block>
+
+ 				</view>
+ 				<!-- 菜谱发布人信息 -->
+ 				<view class="recipedetail">
+ 					<image class="usernameimage" src="https://wx.qlogo.cn/mmopen/vi_32/XKciakDDRBF5o3lXmHh1bBLNpgNBanGEib66Kic5ol3OXql3RuTx37MCibkKcibhQhtXSib0hYYFnO6Eb6LF1RH1TIyw/132"></image>
+ 					<text>星期八</text>
+ 					<image class="tjimage" src="/static/index/tj.png"></image>
+ 					<text>{{item.follows}}</text>
+ 					<image class="hotimage" src="/static/index/hot.png"></image>
+ 					<text>{{item.views}}</text>
+ 				</view>
+ 			</view>
+
+ 		</view>
+ 	</view>
+ </view>
+ <!-- 没有菜谱时显示的内容 -->
+ <view class="tips" wx:if="{{recipeList.length == 0}}">
+ 	暂时还没有朋友发布菜谱哦！！！
+ </view>
+ <!-- 滚动获取数据时，数据不够的情况 -->
+ <view class="tips" wx:if="{{isMore}}">
+ 	已经没有数据啦！！！
+ </view>

@@ -1,0 +1,70 @@
+<view class="page"  wx:if="{{ kf }}">
+	<view class="page__bd">
+		<!-- 发布菜单 -->
+		<form bindsubmit="_doPublishRecipe">
+			<!-- 需要菜单名称 -->
+			<view class="weui-cells__title">菜单名称</view>
+			<view class="weui-cells weui-cells_after-title">
+				<view class="weui-cell">
+					<view class="weui-cell__bd">
+						<input class="weui-input" name="recipename" placeholder="请输入菜单名称" />
+					</view>
+				</view>
+			</view>
+			<!-- 选择菜谱分类 -->
+			<view class="weui-cells__title">菜谱分类</view>
+			<view class="weui-cells weui-cells_after-title">
+				<view class="weui-cell">
+					<view class="weui-cell__bd">
+						<radio-group name="typeid">
+							<!-- 循环遍历菜谱分类 -->
+							<block wx:for="{{recipeTypes}}" wx:key="_id">
+              <!-- 给当前分类加了一个默认值，随便去了index为0的，第一个 -->
+								<radio value="{{item._id}}" style="font-size:13.5px">{{item.typename}}</radio>
+							</block>
+						</radio-group>
+					</view>
+				</view>
+			</view>
+			<!-- 菜谱图片 -->
+			<view class="weui-cells__title">菜谱图片</view>
+			<view class="weui-cells weui-cells_after-title">
+				<view class="weui-cell">
+					<view class="weui-cell__bd">
+						<mp-cells>
+							<mp-cell>
+							<!-- 
+								wx.chooseImage()
+									files:展示的图片列表  array[object]
+									bindselect：选择图片时触发
+							 -->
+								<mp-uploader 
+                    max-count="5" 
+                    title="图片选择" 
+										files="{{files}}"
+										bindselect="_chooseImageHandle"
+										binddelete="_deleteFile"
+                    ></mp-uploader>
+							</mp-cell>
+						</mp-cells>
+					</view>
+				</view>
+			</view>
+			<!-- 菜谱做菜步骤 -->
+			<view class="weui-cells__title">菜品做法</view>
+			<view class="weui-cells weui-cells_after-title">
+				<view class="weui-cell">
+					<view class="weui-cell__bd">
+						<textarea class="weui-textarea" name="recipemakes" placeholder-style="font-size:26rpx" maxlength="-1" placeholder="请输入菜品做法" style="height: 6.6em" />
+						<view class="weui-textarea-counter">不限字数</view>
+          </view>
+        </view>
+      </view>
+      <!-- 发布  需要当前用户的openid（云开发自带）-->
+      <view class="weui-btn-area">
+        <button class="weui-btn"  type="primary" form-type="submit">发布</button>
+      </view>
+    </form>
+  </view>
+</view>
+<view wx:else>正在开发中...</view>
